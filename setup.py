@@ -31,5 +31,5 @@ setup(
     ],
     keywords='',
     install_requires=(),
-    tests_require=('mock'),
+    tests_require=(),
 )
