@@ -1,0 +1,6 @@
+.storage
+.eggs
+*.egg-info
+build
+dist
+README.rst
