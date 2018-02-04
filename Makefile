@@ -62,12 +62,12 @@ sitepackages.install:
 
 PHONY: readme
 readme:
-	pip install pandoc
+	pandoc -o README.rst README.md
 
 PHONY: package
 package: readme
-	pandoc -o README.rst README.md
+	python setup.py sdist
 
 PHONY: submit
-submit: package
+submit: readme
 	python setup.py sdist upload -r pypi
