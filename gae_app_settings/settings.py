@@ -21,3 +21,7 @@ class AppSetting(ndb.Model):
                 return str(default)
             raise KeyError(UNSET_MSG_FMT.format(key))
         return setting.value
+
+    @classmethod
+    def _get_kind(cls):
+        return '! GAE-APP-SETTINGS !'
