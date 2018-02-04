@@ -7,7 +7,9 @@ This package provies a straightforward way to store and access environment-speci
 
 Install `gae_app_settings`:
 
-    $ pip install gae_app_settings
+```bash
+$ pip install gae_app_settings
+```
 
 In your settings module or some other module that loads at startup:
 
