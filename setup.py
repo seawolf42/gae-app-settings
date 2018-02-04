@@ -1,9 +1,5 @@
 import os
-import subprocess
-import sys
-
 from setuptools import find_packages, setup
-from setuptools.command.test import test as TestCommand
 
 
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
@@ -13,19 +9,17 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
-install_dependencies = ()
-
 setup(
-    name='XXX',
-    version='XXX',
+    name='gae-app-settings',
+    version='0.1.0',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
-    description='XXX',
+    description='Provides a key/value store in Google App Engine for sensitive data.',
     long_description=README,
-    url='https://github.com/seawolf42/XXX',
+    url='https://github.com/seawolf42/gae-app-settings',
     author='jeffrey k eliasen',
-    author_email='jeff+XXX@jke.net',
+    author_email='jeff+gae-app-settings@jke.net',
     classifiers=(
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -33,9 +27,9 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Topic :: XXX',
+        'Topic :: Internet :: WWW/HTTP :: Site Management',
     ),
     keywords='',
-    install_requires=install_dependencies,
-    tests_require=install_dependencies + (),
+    install_requires=(),
+    tests_require=('mock'),
 )

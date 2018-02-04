@@ -31,9 +31,16 @@ endif
 # commands for testing
 #
 
-PHONY: test
-test:
+PHONY: test.flake8
+test.flake8:
+	flake8 setup.py gae_app_settings
+
+PHONY: test.unittests
+test.unittests:
 	PYTHONPATH=${PYTHONPATH} python setup.py test
+
+PHONY: test
+test: test.flake8 test.unittests
 
 
 #
