@@ -11,6 +11,14 @@ ifndef VIRTUAL_ENV
 $(error VIRTUAL_ENV is not set)
 endif
 
+GCLOUD_PATH := $(shell which gcloud)
+ifndef GCLOUD_PATH
+$(error google-cloud-sdk must be installed and on your path)
+endif
+
+APPENGINE_PYTHON_PATH := $(realpath ${GCLOUD_PATH}/../../platform/google_appengine)
+PYTHONPATH := ${PYTHONPATH}:${APPENGINE_PYTHON_PATH}/:${APPENGINE_PYTHON_PATH}/lib/yaml/lib/
+
 ifeq (test,$(firstword $(MAKECMDGOALS)))
   # use the rest as arguments for "test"
   TEST_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -25,7 +33,7 @@ endif
 
 PHONY: test
 test:
-	python setup.py test
+	PYTHONPATH=${PYTHONPATH} python setup.py test
 
 
 #
