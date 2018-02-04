@@ -42,6 +42,17 @@ test.unittests:
 PHONY: test
 test: test.flake8 test.unittests
 
+PHONY: test.coverage.exec
+test.coverage.exec:
+	PYTHONPATH=${PYTHONPATH} $(VIRTUAL_ENV)/bin/coverage run --source='gae_app_settings' setup.py test
+
+PHONY: test.coverage.report
+test.coverage.report:
+	$(VIRTUAL_ENV)/bin/coverage report
+
+PHONY: test.coverage
+test.coverage: test.coverage.exec test.coverage.report
+
 
 #
 # commands for virtualenv maintenance
