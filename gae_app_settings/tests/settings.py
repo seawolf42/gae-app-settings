@@ -12,6 +12,8 @@ from ..settings import AppSetting
 test_key = 'aaa'
 test_value = 'bbb'
 test_default = 'ccc'
+test_default_int = 42
+test_default_int_stringified = str(test_default_int)
 
 
 class AppSettingTest(unittest.TestCase):
@@ -69,3 +71,8 @@ class AppSettingTest(unittest.TestCase):
         AppSetting.get(test_key, test_default)
         with self.assertRaises(KeyError):
             AppSetting.get(test_key)
+
+    def test_default_value_returned_is_string(self):
+        result = AppSetting.get(test_key, test_default_int)
+        self.assertIsInstance(result, str)
+        self.assertEqual(result, test_default_int_stringified)
