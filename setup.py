@@ -20,7 +20,7 @@ setup(
     url='https://github.com/seawolf42/gae-app-settings',
     author='jeffrey k eliasen',
     author_email='jeff+gae-app-settings@jke.net',
-    classifiers=(
+    classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -28,7 +28,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Topic :: Internet :: WWW/HTTP :: Site Management',
-    ),
+    ],
     keywords='',
     install_requires=(),
     tests_require=('mock'),
