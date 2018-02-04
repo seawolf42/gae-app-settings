@@ -1,0 +1,14 @@
+sudo: false
+language: python
+python: "2.7"
+env:
+  - PATH=$HOME/google-cloud-sdk/bin:$PATH PYTHONPATH=$PYTHONPATH:$HOME/google-cloud-sdk/platform/google_appengine/:$HOME/google-cloud-sdk/platform/google_appengine/lib/yaml/lib/ CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+  - if [ ! -d ${HOME}/google-cloud-sdk ]; then curl https://sdk.cloud.google.com | bash ; fi
+  - gcloud components update
+  - gcloud components install app-engine-python
+install:
+  - pip install . flake8
+script:
+  - flake8 .
+  - python setup.py test
