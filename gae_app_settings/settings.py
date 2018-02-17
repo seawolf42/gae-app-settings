@@ -7,8 +7,8 @@ UNSET_MSG_FMT = 'attempt to retrieve setting {0} failed'
 
 class AppSetting(ndb.Model):
 
-    key = ndb.StringProperty()
-    value = ndb.StringProperty()
+    key = ndb.StringProperty(required=True)
+    value = ndb.TextProperty(required=True)
 
     @staticmethod
     def get(key, default=None):
