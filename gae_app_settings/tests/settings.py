@@ -76,3 +76,16 @@ class AppSettingTest(unittest.TestCase):
         result = AppSetting.get(test_key, test_default_int)
         self.assertIsInstance(result, str)
         self.assertEqual(result, test_default_int_stringified)
+
+    def test_return_none_instead_of_exception(self):
+        result = AppSetting.get(test_key, raise_exception=False)
+        self.assertEqual(result, None)
+
+    def test_no_exception_and_default(self):
+        result = AppSetting.get(test_key, default=test_default, raise_exception=False)
+        self.assertEqual(result, test_default)
+
+    def test_no_exception_and_saved(self):
+        self.setting = AppSetting(key=test_key, value=test_value)
+        self.setting.put()
+        self.assertEqual(AppSetting.get(test_key, raise_exception=False), test_value)
