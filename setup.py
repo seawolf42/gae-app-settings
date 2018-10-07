@@ -3,10 +3,10 @@ from setuptools import find_packages, setup
 
 
 try:
-    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+    with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
         README = readme.read()
 except Exception:
-    README = '<failed to open README.rst>'
+    README = '<failed to open README.md>'
 
 
 # allow setup.py to be run from any path
