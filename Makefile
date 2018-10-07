@@ -25,6 +25,24 @@ ifeq (test,$(firstword $(MAKECMDGOALS)))
   # ...and turn them into do-nothing targets
   $(eval $(TEST_ARGS):;@:)
 endif
+#
+# commands for artifact cleanup
+#
+
+PHONY: clean.build
+clean.build:
+	rm -rf build/
+	rm -rf dist/
+	rm -rf .eggs/
+	rm -rf *.egg-info
+
+PHONY: clean.pyc
+clean.pyc:
+	find . -name '*.pyc' -delete
+	find . -name '*.pyo' -delete
+
+PHONY: clean
+clean: clean.build clean.pyc
 
 
 #
@@ -33,52 +51,25 @@ endif
 
 PHONY: test.flake8
 test.flake8:
-	flake8 setup.py gae_app_settings
+	flake8 .
 
 PHONY: test.unittests
 test.unittests:
 	PYTHONPATH=${PYTHONPATH} python setup.py test
 
 PHONY: test
-test: test.flake8 test.unittests
-
-PHONY: test.coverage.exec
-test.coverage.exec:
-	PYTHONPATH=${PYTHONPATH} $(VIRTUAL_ENV)/bin/coverage run --source='gae_app_settings' setup.py test
-
-PHONY: test.coverage.report
-test.coverage.report:
-	$(VIRTUAL_ENV)/bin/coverage report
-
-PHONY: test.coverage
-test.coverage: test.coverage.exec test.coverage.report
-
-
-#
-# commands for virtualenv maintenance
-#
-
-PHONY: sitepackages.clean
-sitepackages.clean:
-	pip freeze | xargs pip uninstall -y
-
-PHONY: sitepackages.install
-sitepackages.install:
-	pip install .
+test: test.unittests test.flake8
 
 
 #
 # commands for packaging and deploying to pypi
 #
 
-PHONY: readme
-readme:
-	pandoc -o README.rst README.md
-
-PHONY: package
-package: readme
+PHONY: sdist
+sdist:
 	python setup.py sdist
+	python setup.py bdist_wheel
 
-PHONY: submit
-submit: readme
-	python setup.py sdist upload -r pypi
+PHONY: release
+release: clean sdist
+	twine upload dist/*
