@@ -13,6 +13,11 @@ except Exception:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 
+# Google Cloud SDK misses an import
+# TODO: remove once SDK has been fixed
+_temp_test_requirements = ('pyyaml',)
+
+
 setup(
     name='gae-app-settings',
     version='1.1.0',
@@ -35,5 +40,5 @@ setup(
     ],
     keywords='',
     install_requires=(),
-    tests_require=(),
+    tests_require=() + _temp_test_requirements,
 )
