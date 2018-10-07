@@ -11,7 +11,7 @@ class AppSetting(ndb.Model):
     value = ndb.TextProperty(required=True)
 
     @staticmethod
-    def get(key, default=None):
+    def get(key, default=None, raise_exception=True):
         setting = AppSetting.query(AppSetting.key == key).get()
         if not setting:
             setting = AppSetting(key=key, value=UNSET)
@@ -19,7 +19,9 @@ class AppSetting(ndb.Model):
         if setting.value == UNSET:
             if default:
                 return str(default)
-            raise KeyError(UNSET_MSG_FMT.format(key))
+            if raise_exception:
+                raise KeyError(UNSET_MSG_FMT.format(key))
+            return None
         return setting.value
 
     @classmethod

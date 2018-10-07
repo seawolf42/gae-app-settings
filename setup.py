@@ -15,7 +15,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='gae-app-settings',
-    version='1.0.1',
+    version='1.1.0',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
