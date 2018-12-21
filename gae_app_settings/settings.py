@@ -17,7 +17,7 @@ class AppSetting(ndb.Model):
             setting = AppSetting(key=key, value=UNSET)
             setting.put()
         if setting.value == UNSET:
-            if default:
+            if default is not None:
                 return str(default)
             if raise_exception:
                 raise KeyError(UNSET_MSG_FMT.format(key))

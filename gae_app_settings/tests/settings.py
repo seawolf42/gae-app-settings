@@ -89,3 +89,7 @@ class AppSettingTest(unittest.TestCase):
         self.setting = AppSetting(key=test_key, value=test_value)
         self.setting.put()
         self.assertEqual(AppSetting.get(test_key, raise_exception=False), test_value)
+
+    def test_empty_string_default(self):
+        result = AppSetting.get(test_key, default='')
+        self.assertEqual(result, '')
